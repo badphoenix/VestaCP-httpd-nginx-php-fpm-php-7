@@ -13,9 +13,8 @@
 
 2.1 nano /usr/local/vesta/data/templates/web/httpd/php7-fpms.tpl 
 і вносимо в нього наступні дані 
-<pre>
-<VirtualHost %ip%:%web_port%>
-
+```
+  <VirtualHost %ip%:%web_port%>
     ServerName %domain_idn%
     %alias_string%
     ServerAdmin %email%
@@ -31,19 +30,17 @@
         AllowOverride All
         Options +Includes -Indexes +ExecCGI
         DirectoryIndex index.php index.html index.htm
-
          <FilesMatch \.php$>
         SetHandler "proxy:fcgi://%backend_lsnr_cust%"
         </FilesMatch>   
-
     </Directory>
     <Directory %home%/%user%/web/%domain%/stats>
         AllowOverride All
     </Directory>
     IncludeOptional %home%/%user%/conf/web/%web_system%.%domain%.conf*
+  </VirtualHost>
+```
 
-</VirtualHost>
-</pre>
 2.2 nano /usr/local/vesta/data/templates/web/httpd/php7-fpms.stpl
 і вносимо в нього наступні дані 
 
