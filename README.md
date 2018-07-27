@@ -296,18 +296,19 @@ server {
 ```
 
 4 тепер потрібно виконати команди 
-
+```
 /usr/local/vesta/bin/v-list-web-templates
 /usr/local/vesta/bin/v-list-web-templates-proxy 
 systemctl restart php-fpm.service
+```
 Обновлюємо шаблони вести, тепер вилогінюємо з вебморди і знову логінимося.
 
-5. Вибираємо потрібен домен і в шаблонах Web TemplateHTTPD вибираємо php5-fpms
+5. Вибираємо потрібен домен і в шаблонах Web TemplateHTTPD вибираємо php7-fpms
 
 5.1 В цьому домені вибираємо для Nginx Proxy Template customs. нажимаємо примінити
 
 
-6 Тепер додамо службу php-fpm в розділ SERVER (https://185.86.77.185:8083/list/server/) !888.png!
+6 Тепер додамо службу php-fpm в розділ SERVER (https://xxx.xxx.xxx.xxx:8083/list/server/) 
 
 6.1  nano /usr/local/vesta/conf/vesta.conf
 в кінець додаємо WEB_FPM='php-fpm'
