@@ -335,11 +335,11 @@ systemctl restart php-fpm.service
 Додаємо
     echo -ne "$WEB_SSL_PORT\t$WEB_FPM\t$PROXY_SYSTEM\t$PROXY_PORT\t"
 
-В розділі # CSV list низче
+В розділі # CSV list нижче
     echo -n "'WEB_SSL_PORT','WEB_BACKEND','PROXY_SYSTEM','PROXY_PORT',"
 Додаємо
     echo -n "'WEB_SSL_PORT','WEB_FPM','PROXY_SYSTEM','PROXY_PORT',"
-Також в цьому розділі низче
+Також в цьому розділі нижче
     echo -n "'$WEB_SSL_PORT','$WEB_BACKEND','$PROXY_SYSTEM','$PROXY_PORT',"
 Додаємо
     echo -n "'$WEB_SSL_PORT','$WEB_FPM','$PROXY_SYSTEM','$PROXY_PORT'," 
