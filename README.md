@@ -44,7 +44,7 @@
 2.2 nano /usr/local/vesta/data/templates/web/httpd/php7-fpms.stpl
 і вносимо в нього наступні дані 
 
-<pre>
+```
 <VirtualHost %ip%:%web_ssl_port%>
 
     ServerName %domain_idn%
@@ -81,10 +81,11 @@
     IncludeOptional %home%/%user%/conf/web/s%web_system%.%domain%.conf*
 
 </VirtualHost>
-</pre>
+```
+
 2.3  nano /usr/local/vesta/data/templates/web/httpd/php7-fpms.sh
 і вносимо в нього наступні дані 
-<pre>
+```
 user="$1"
 domain="$2"
 ip="$3"
@@ -123,10 +124,12 @@ sed -i -e "s/%backend_lsnr_cust%/127.0.0.1:$backend_port/g" /home/$user/conf/web
 
 service $WEB_FPM restart >/dev/null
 
-</pre>
+```
+
 2.4 nano /usr/local/vesta/data/templates/web/php-fpm/php7-dynamics.tpl
 і вносимо в нього наступні дані 
-<pre>
+
+```
 [%backend%]
 user = %user%
 listen.owner = %user%
@@ -169,7 +172,7 @@ env[TMP] = /tmp
 env[TMPDIR] = /tmp
 env[TEMP] = /tmp
 
-</pre>
+```
 
 2.5 Далі робимо його виконуваним chmod +x  /usr/local/vesta/data/templates/web/httpd/php7-fpms.sh
 
@@ -177,7 +180,7 @@ env[TEMP] = /tmp
 
 3.1  nano /usr/local/vesta/data/templates/web/nginx/customs.tpl
 
-<pre>
+```
 server {
     listen	%ip%:80;
     server_name %domain_idn% %alias_idn%;
@@ -229,11 +232,11 @@ server {
 
     include     %home%/%user%/conf/web/nginx.%domain_idn%.conf*;
 }
-</pre>
+```
 
 3.2 nano usr/local/vesta/data/templates/web/nginx/customs.stpl 
 
-<pre>
+```
 server {
     listen	%ip%:443;
     server_name %domain_idn% %alias_idn%;
@@ -290,7 +293,7 @@ server {
     include     %home%/%user%/conf/web/snginx.%domain_idn%.conf*;
 }
 
-</pre>
+```
 
 4 тепер потрібно виконати команди 
 
@@ -309,7 +312,7 @@ systemctl restart php-fpm.service
 6.1  nano /usr/local/vesta/conf/vesta.conf
 в кінець додаємо WEB_FPM='php-fpm'
 6.2 nano /usr/local/vesta/bin/v-list-sys-config
-<pre>
+```
 В розділ # JSON list function нижче 
         "WEB_BACKEND": "'$WEB_BACKEND'",
 Додаємо
@@ -337,9 +340,9 @@ systemctl restart php-fpm.service
     echo -n "'$WEB_SSL_PORT','$WEB_BACKEND','$PROXY_SYSTEM','$PROXY_PORT',"
 Додаємо
     echo -n "'$WEB_SSL_PORT','$WEB_FPM','$PROXY_SYSTEM','$PROXY_PORT'," 
-</pre>
+```
 6.3 nano /usr/local/vesta/bin/v-list-sys-services  
-<pre>
+```
 Нижче розділу 
 # Checking WEB Backend
 if [ ! -z "$WEB_BACKEND" ] && [ "$WEB_BACKEND" != 'remote' ]; then
@@ -356,9 +359,12 @@ if [ ! -z "$WEB_FPM" ] && [ "$WEB_FOM" != 'remote' ]; then
     data="$data\nNAME='$WEB_FPM' SYSTEM='backend server' STATE='$state'"
     data="$data CPU='$cpu' MEM='$mem' RTIME='$rtime'"
 fi
-</pre>
+```
 6.4 service vesta restart
 
 7 Для повної красоти потрібно щоб при видалені домену чи зміні темплейта ребутався автоматично php-fpm
 
-Відкриваємо /usr/local/vesta/bin/v-restart-web і в кінець перед exit дописуємо "service $WEB_FPM restart >/dev/null 2>&1"
+Відкриваємо /usr/local/vesta/bin/v-restart-web і в кінець перед exit дописуємо 
+```
+service $WEB_FPM restart >/dev/null 2>&1
+```
